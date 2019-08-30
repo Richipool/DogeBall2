@@ -10,5 +10,6 @@ package DogeBall.objects;
  * @author Richard
  */
 public class Raqueta {
-    
+    int x;
+    int y;
 }

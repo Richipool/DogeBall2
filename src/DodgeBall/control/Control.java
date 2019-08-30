@@ -37,9 +37,8 @@ public class Control extends JFrame implements KeyListener, Runnable {
         return modelo;
     }
    public void moverPelota(){
-        
-       // modelo.getBola().rotar((int)(Math.random()*5));
-        modelo.getBola().cambiarRegion(800,700, 0, 0);
+        modelo.getBola().rotar((int)(Math.random()*2));
+        modelo.getBola().cambiarRegion(700,600, 0, 0);
         modelo.getBola().mover();
     }
 

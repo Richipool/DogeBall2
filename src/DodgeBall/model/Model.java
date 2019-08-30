@@ -19,7 +19,7 @@ public class Model {
     public Model() {
         bola = new Bola();
         bola.setDirecion((float)1.2);
-        bola.setVelocidad((float)5.0);
+        bola.setVelocidad((float)10.0);
         
     }
 
