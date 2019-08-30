@@ -12,4 +12,6 @@ package DogeBall.objects;
 public class Raqueta {
     int x;
     int y;
+    int alto;
+    int ancho;
 }
