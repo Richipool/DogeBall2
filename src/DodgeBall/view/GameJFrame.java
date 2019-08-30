@@ -31,7 +31,7 @@ public class GameJFrame extends javax.swing.JFrame {
         this.setPreferredSize(dimencion);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
-        
+        this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         panelJuego = new PanelDeJuego(model);
         panelJuego.setSize(dimencion);
         this.add(panelJuego);
