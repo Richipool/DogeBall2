@@ -5,6 +5,8 @@
  */
 package DogeBall.objects;
 
+import java.awt.Rectangle;
+
 /**
  *
  * @author Richard
@@ -28,7 +30,7 @@ public class Raqueta {
         minX = 0;
         minY = 0;
         int alto = 43;
-        int ancho = 120; 
+        int ancho = 120;
     }
 
     public int getX() {
@@ -94,5 +96,9 @@ public class Raqueta {
     public void setAncho(int ancho) {
         this.ancho = ancho;
     }
-    
+
+    public Rectangle getBounds() {
+        return new Rectangle(x, y, 120, 43);
+    }
+
 }
