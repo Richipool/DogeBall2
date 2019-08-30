@@ -7,24 +7,27 @@
 package DodgeBall.model;
 
 import DogeBall.objects.Bola;
-import javax.swing.ImageIcon;
+import DogeBall.objects.Raqueta;
 
 /**
  *
  * @author GL552
  */
 public class Model {
-    public Bola bola;
-    
+    private Bola bola;
+    private Raqueta raqueta;
     public Model() {
         bola = new Bola();
         bola.setDirecion((float)1.2);
         bola.setVelocidad((float)10.0);
-        
+        raqueta = new Raqueta();
     }
-
     public Bola getBola() {
         return bola;
+    }
+
+    public Raqueta getRaqueta() {
+        return raqueta;
     }
     
 }

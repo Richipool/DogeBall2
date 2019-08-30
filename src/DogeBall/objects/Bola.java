@@ -143,7 +143,7 @@ public class Bola {
         this.minY = minY;
     }
     public void rotar(int grados){
-        direccion += (double)(grados*Math.PI/180);
+        direccion += (double)(grados*Math.PI/360);
     }
     public void mover(){
         int auxDeX = x;
