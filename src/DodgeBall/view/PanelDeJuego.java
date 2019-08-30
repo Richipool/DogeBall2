@@ -26,7 +26,7 @@ public class PanelDeJuego extends JPanel {
         this.model = model;
         imagenBola = new BufferedImage(model.getBola().getDiametro(),model.getBola().getDiametro() ,BufferedImage.TYPE_INT_RGB );
         fondo = new BufferedImage(800,700, BufferedImage.TYPE_INT_RGB);
-        imagenRaqueta = new BufferedImage(120,43,BufferedImage.TYPE_INT_RGB );
+        imagenRaqueta = new BufferedImage(model.getRaqueta().getAncho(),model.getRaqueta().getAlto(),BufferedImage.TYPE_INT_RGB );
         try{
             imagenBola = ImageIO.read(this.getClass().getResourceAsStream("planeta.png"));
             fondo = ImageIO.read(this.getClass().getResourceAsStream("MDbwLa3.jpg"));

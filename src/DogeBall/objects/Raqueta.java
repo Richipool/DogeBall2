@@ -17,8 +17,8 @@ public class Raqueta {
     private int maxY;
     private int minX;
     private int minY;
-    int alto;
-    int ancho;
+    int alto = 43;
+    int ancho = 120;
 
     public Raqueta() {
         x = 200;
@@ -27,8 +27,6 @@ public class Raqueta {
         maxY = 0;
         minX = 0;
         minY = 0;
-        int alto = 43;
-        int ancho = 120; 
     }
 
     public int getX() {
