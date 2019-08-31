@@ -19,18 +19,16 @@ public class Raqueta {
     private int maxY;
     private int minX;
     private int minY;
-    int alto = 43;
-    int ancho = 120;
+    int alto = 120;
+    int ancho = 20;
 
     public Raqueta() {
-        x = 200;
-        y = 260;
+        x = 260;
+        y = 200;
         maxX = 0;
         maxY = 0;
         minX = 0;
         minY = 0;
-        int alto = 43;
-        int ancho = 120;
     }
 
     public int getX() {
@@ -97,8 +95,8 @@ public class Raqueta {
         this.ancho = ancho;
     }
 
-    public Rectangle getBounds() {
-        return new Rectangle(x, y, 150, 2);
-    }
+    /*public Rectangle getBounds() {
+        return new Rectangle(x, y, 123, 43);
+    }*/
 
 }

@@ -21,13 +21,12 @@ public class Bola {
     private int maxY;
     private int minX;
     private int minY;
-    
+
     private int diametro;
     private int radio;
     private float direccion;
     private float velocidad;
 
-    
     /**
      * @return the diametro
      */
@@ -111,7 +110,7 @@ public class Bola {
     public void setY(int y) {
         this.y = y;
     }
-    
+
     public Bola(int x, int y, int maxX, int maxY, int minX, int minY, int diametro, int radio, float direcion, float velocidad, Color mColor) {
         this.x = x;
         this.y = y;
@@ -124,52 +123,62 @@ public class Bola {
         this.direccion = direcion;
         this.velocidad = velocidad;
     }
-    
+
     public Bola() {
-        x=360;
-        y=300;
+        x = 360;
+        y = 300;
         maxX = 0;
         maxY = 0;
         minX = 0;
         minX = 0;
         diametro = 80;
         radio = 0;
-        direccion =0.0f;
+        direccion = 0.0f;
         velocidad = 14.0f;
     }
-    public void cambiarRegion(int maxX, int maxY, int minX, int minY){
+
+    public void cambiarRegion(int maxX, int maxY, int minX, int minY) {
         this.maxX = maxX;
         this.maxY = maxY;
         this.minX = minX;
         this.minY = minY;
     }
-    public void rotar(int grados){
-        direccion += (double)(grados*Math.PI/360);
+
+    public void rotar(int grados) {
+        direccion += (double) (grados * Math.PI / 360);
     }
-    
-     public Rectangle getBounds() {
-        return new Rectangle(x, y, diametro, diametro);
+
+    public Rectangle getBounds() {
+        return new Rectangle(x - 40, y - 40, diametro, diametro);
     }
-    
-    public void mover(Raqueta raqueta){
+
+    public boolean colicion(Raqueta raqueta) {
+        float deltaX = x - Math.max(raqueta.getX(), Math.min(x, raqueta.getX() + raqueta.getAncho()));
+        float deltaY = y - Math.max(raqueta.getY(), Math.min(y, raqueta.getY() - raqueta.getAlto()));
+        return (deltaX * deltaX + deltaY * deltaY) < (80 * 80);
+        
+    }
+
+    public void mover(Raqueta raqueta) {
         int auxDeX = x;
         int auxDeY = y;
-        x += (int)(Math.cos(direccion)*velocidad);
-        y += (int)(Math.sin(direccion)*velocidad);
-        if(x>=(maxX-radio)||x<=(minX+radio)){
-            direccion = (float)(Math.PI-direccion);
-            x = auxDeX + (int)(Math.cos(direccion)*velocidad);
-            y = auxDeY + (int)(Math.sin(direccion)*velocidad);
+        x += (int) (Math.cos(direccion) * velocidad);
+        y += (int) (Math.sin(direccion) * velocidad);
+        if (x >= (maxX - radio) || x <= (minX + radio)) {
+            direccion = (float) (Math.PI - direccion);
+            x = auxDeX + (int) (Math.cos(direccion) * velocidad);
+            y = auxDeY + (int) (Math.sin(direccion) * velocidad);
         }
-        if(y>=(maxY-radio)||y<=(minY+radio)){
-            direccion = (float)(2 * Math.PI-direccion);
-            x = auxDeX + (int)(Math.cos(direccion)*velocidad);
-            y = auxDeY + (int)(Math.sin(direccion)*velocidad);
+        if (y >= (maxY - radio) || y <= (minY + radio)) {
+            direccion = (float) (2 * Math.PI - direccion);
+            x = auxDeX + (int) (Math.cos(direccion) * velocidad);
+            y = auxDeY + (int) (Math.sin(direccion) * velocidad);
         }
-        if(raqueta.getBounds().intersects(getBounds())){
-            direccion = (float)(2 * Math.PI-direccion);
-            x = auxDeX + (int)(Math.cos(direccion)*velocidad);
-            y = auxDeY + (int)(Math.sin(direccion)*velocidad);
+        if (colicion(raqueta)) {
+            direccion = (float) (50 * Math.PI - direccion);
+            x = auxDeX + (int) (Math.cos(direccion) * velocidad);
+            y = auxDeY + (int) (Math.sin(direccion) * velocidad);
+            System.out.println("Choco");
         }
-    }           
+    }
 }

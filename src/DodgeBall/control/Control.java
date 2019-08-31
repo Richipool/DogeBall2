@@ -41,10 +41,10 @@ public class Control extends JFrame implements KeyListener, Runnable {
     }
 
     public void moverPelota() {
-       // modelo.getBola().rotar((int) (Math.random() * 2));
+        modelo.getBola().rotar((int) (Math.random() * 2));
         modelo.getBola().cambiarRegion(700, 600, 0, 0);
         modelo.getBola().mover(modelo.getRaqueta());
-        modelo.getBola().rotar((int) (Math.random() * 2));
+        //modelo.getBola().rotar((int) (Math.random() * 2));
     }
 
     @Override

@@ -49,7 +49,7 @@ public class PanelDeJuego extends JPanel {
         int y = model.getRaqueta().getY();
         int ancho = model.getRaqueta().getAncho();
         int alto = model.getRaqueta().getAlto();
-        g.drawImage(imagenRaqueta, x,y,180, 43, null);
+        g.drawImage(imagenRaqueta, x,y,120, 43, null);
     }
    @Override
    public void paintComponent(Graphics g){

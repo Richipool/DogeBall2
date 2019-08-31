@@ -13,7 +13,7 @@ import java.awt.Dimension;
  *
  * @author GL552
  */
-public class GameJFrame extends javax.swing.JFrame {
+public class GameJFrame extends javax.swing.JFrame{
 
     private PanelDeJuego panelJuego;
     private Model modelo;
@@ -35,6 +35,7 @@ public class GameJFrame extends javax.swing.JFrame {
         panelJuego = new PanelDeJuego(model);
         panelJuego.setSize(dimencion);
         this.add(panelJuego);
+        this.addKeyListener(control);
     }
     
     public PanelDeJuego getPanelJuego() {
