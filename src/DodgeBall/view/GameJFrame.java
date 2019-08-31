@@ -35,6 +35,7 @@ public class GameJFrame extends javax.swing.JFrame {
         panelJuego = new PanelDeJuego(model);
         panelJuego.setSize(dimencion);
         this.add(panelJuego);
+        this.addKeyListener(control);
     }
     
     public PanelDeJuego getPanelJuego() {

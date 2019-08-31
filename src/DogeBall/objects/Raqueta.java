@@ -25,10 +25,10 @@ public class Raqueta {
     public Raqueta() {
         x = 200;
         y = 260;
-        maxX = 0;
-        maxY = 0;
+        maxX = 600;
+        maxY = 619;
         minX = 0;
-        minY = 0;
+        minY = 10;
         int alto = 43;
         int ancho = 120;
     }
@@ -101,4 +101,29 @@ public class Raqueta {
         return new Rectangle(x, y, 120, 43);
     }
 
+    public void Mover(int flecha) {//recibe un entero que es el entero 
+        switch (flecha) {
+            case 38://flecha arriba
+                if (y>=(minY+alto)) {
+                    y -= 10;
+                }
+                break;
+            case 40://flecha abajo
+                if (y<=(maxY-alto)) {
+                    y += 10;
+                }
+                break;
+            case 37://flecha izquierda
+                if (x>=(minX+ancho)) {
+                    x -= 10;
+                }
+                break;
+            case 39://flecha derecha
+                if (x+ancho<=(maxX+ancho)) {
+                    x += 10;
+                }
+                break;
+
+        }
+    }
 }
