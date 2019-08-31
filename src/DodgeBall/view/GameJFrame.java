@@ -28,7 +28,7 @@ public class GameJFrame extends javax.swing.JFrame{
         modelo = model;
         Dimension dimencion = new Dimension(800, 700);
         this.setSize(dimencion);
-        this.setPreferredSize(dimencion);
+        //this.setPreferredSize(dimencion);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
