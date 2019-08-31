@@ -19,8 +19,8 @@ public class Raqueta {
     private int maxY;
     private int minX;
     private int minY;
-    int alto;
-    int ancho;
+    int alto = 43;
+    int ancho = 120;
 
     public Raqueta() {
         x = 200;
@@ -98,7 +98,7 @@ public class Raqueta {
     }
 
     public Rectangle getBounds() {
-        return new Rectangle(x, y, 120, 43);
+        return new Rectangle(x, y, 150, 2);
     }
 
     public void Mover(int flecha) {//recibe un entero que es el entero 
