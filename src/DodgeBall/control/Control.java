@@ -16,50 +16,55 @@ import javax.swing.JFrame;
  * @author GL552
  */
 public class Control extends JFrame implements KeyListener, Runnable {
-    private  Model modelo;
-    private  GameJFrame FrameJuego;
-    
+
+    private Model modelo;
+    private GameJFrame FrameJuego;
+
     public Control() {
         modelo = new Model();
         FrameJuego = new GameJFrame(modelo, this);
         FrameJuego.setVisible(true);
         //vista.setControl(this);
     }
-    public void jugar() throws InterruptedException{
-        while(true){
+
+    public void jugar() throws InterruptedException {
+        while (true) {
             moverPelota();
             FrameJuego.getPanelJuego().repaint();
             Thread.sleep(10);
-            
+
         }
     }
+
     public Model getModelo() {
         return modelo;
     }
-   public void moverPelota(){
-        modelo.getBola().rotar((int)(Math.random()*2));
-        modelo.getBola().cambiarRegion(700,600, 0, 0);
-        modelo.getBola().mover();
+
+    public void moverPelota() {
+       // modelo.getBola().rotar((int) (Math.random() * 2));
+        modelo.getBola().cambiarRegion(700, 600, 0, 0);
+        modelo.getBola().mover(modelo.getRaqueta());
+        modelo.getBola().rotar((int) (Math.random() * 2));
     }
 
     @Override
     public void keyTyped(KeyEvent e) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     @Override
     public void keyPressed(KeyEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
-    
+
     @Override
     public void keyReleased(KeyEvent e) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     @Override
     public void run() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

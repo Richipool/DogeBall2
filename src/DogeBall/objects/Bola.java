@@ -7,6 +7,7 @@ package DogeBall.objects;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 
 /**
  *
@@ -145,7 +146,12 @@ public class Bola {
     public void rotar(int grados){
         direccion += (double)(grados*Math.PI/360);
     }
-    public void mover(){
+    
+     public Rectangle getBounds() {
+        return new Rectangle(x, y, diametro, diametro);
+    }
+    
+    public void mover(Raqueta raqueta){
         int auxDeX = x;
         int auxDeY = y;
         x += (int)(Math.cos(direccion)*velocidad);
@@ -156,6 +162,11 @@ public class Bola {
             y = auxDeY + (int)(Math.sin(direccion)*velocidad);
         }
         if(y>=(maxY-radio)||y<=(minY+radio)){
+            direccion = (float)(2 * Math.PI-direccion);
+            x = auxDeX + (int)(Math.cos(direccion)*velocidad);
+            y = auxDeY + (int)(Math.sin(direccion)*velocidad);
+        }
+        if(raqueta.getBounds().intersects(getBounds())){
             direccion = (float)(2 * Math.PI-direccion);
             x = auxDeX + (int)(Math.cos(direccion)*velocidad);
             y = auxDeY + (int)(Math.sin(direccion)*velocidad);
