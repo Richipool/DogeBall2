@@ -149,15 +149,15 @@ public class Bola {
     }
 
     public Rectangle getBounds() {
-        return new Rectangle(x - 40, y - 40, diametro, diametro);
+        return new Rectangle(x, y, diametro, diametro);
     }
 
-    public boolean colicion(Raqueta raqueta) {
-        float deltaX = x - Math.max(raqueta.getX(), Math.min(x, raqueta.getX() + raqueta.getAncho()));
-        float deltaY = y - Math.max(raqueta.getY(), Math.min(y, raqueta.getY() - raqueta.getAlto()));
-        return (deltaX * deltaX + deltaY * deltaY) < (80 * 80);
-        
-    }
+//    public boolean colicion(Raqueta raqueta) {
+//        float deltaX = x - Math.max(raqueta.getX(), Math.min(x, raqueta.getX() + raqueta.getAncho()));
+//        float deltaY = y - Math.max(raqueta.getY(), Math.min(y, raqueta.getY() - raqueta.getAlto()));
+//        return (deltaX * deltaX + deltaY * deltaY) < (80 * 80);
+//        
+//    }
 
     public void mover(Raqueta raqueta) {
         int auxDeX = x;
@@ -174,10 +174,13 @@ public class Bola {
             x = auxDeX + (int) (Math.cos(direccion) * velocidad);
             y = auxDeY + (int) (Math.sin(direccion) * velocidad);
         }
-        if (colicion(raqueta)) {
-            direccion = (float) (50 * Math.PI - direccion);
+        if (raqueta.getBounds().intersects(getBounds()) || getBounds().intersects(raqueta.getBounds())) {
+            direccion = (float) (Math.random()*100 * Math.PI - direccion);
+            System.out.println(direccion);
             x = auxDeX + (int) (Math.cos(direccion) * velocidad);
             y = auxDeY + (int) (Math.sin(direccion) * velocidad);
+            System.out.println(x);
+            System.out.println(y);
             System.out.println("Choco");
         }
     }

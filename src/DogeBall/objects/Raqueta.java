@@ -21,7 +21,7 @@ public class Raqueta {
     private int minY;
     int alto = 28;
     int ancho = 120;
-    int velocidad = 20;
+    int velocidad = 50;
 
     public Raqueta() {
         x = 200;
