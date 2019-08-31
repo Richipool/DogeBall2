@@ -19,17 +19,18 @@ public class Raqueta {
     private int maxY;
     private int minX;
     private int minY;
-    int alto = 43;
+    int alto = 28;
     int ancho = 120;
+    int velocidad = 20;
 
     public Raqueta() {
         x = 200;
         y = 260;
-        maxX = 600;
-        maxY = 619;
+        maxX = 700;
+        maxY = 600;
         minX = 0;
-        minY = 10;
-        int alto = 43;
+        minY = 0;
+        int alto = 28;
         int ancho = 120;
     }
 
@@ -98,29 +99,29 @@ public class Raqueta {
     }
 
     public Rectangle getBounds() {
-        return new Rectangle(x, y, 150, 2);
+        return new Rectangle(x, y, 120, 28);
     }
 
     public void Mover(int flecha) {//recibe un entero que es el entero 
         switch (flecha) {
             case 38://flecha arriba
-                if (y>=(minY+alto)) {
-                    y -= 10;
+                if (y >= (minY + alto/2)) {
+                    y -= velocidad;
                 }
                 break;
             case 40://flecha abajo
-                if (y<=(maxY-alto)) {
-                    y += 10;
+                if (y <= (maxY + alto)) {
+                    y += velocidad;
                 }
                 break;
             case 37://flecha izquierda
-                if (x>=(minX+ancho)) {
-                    x -= 10;
+                if (x >= (minX+ancho/8)) {
+                    x -= velocidad;
                 }
                 break;
             case 39://flecha derecha
-                if (x+ancho<=(maxX+ancho)) {
-                    x += 10;
+                if (x <= maxX - ancho/4) {
+                    x += velocidad;
                 }
                 break;
 

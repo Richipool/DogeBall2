@@ -30,7 +30,7 @@ public class PanelDeJuego extends JPanel {
         try{
             imagenBola = ImageIO.read(this.getClass().getResourceAsStream("planeta.png"));
             fondo = ImageIO.read(this.getClass().getResourceAsStream("MDbwLa3.jpg"));
-            imagenRaqueta = ImageIO.read(this.getClass().getResourceAsStream("raqueta.png"));
+            imagenRaqueta = ImageIO.read(this.getClass().getResourceAsStream("raqueta2.png"));
         }catch(IOException ex){
             Logger.getLogger(PanelDeJuego.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -49,7 +49,7 @@ public class PanelDeJuego extends JPanel {
         int y = model.getRaqueta().getY();
         int ancho = model.getRaqueta().getAncho();
         int alto = model.getRaqueta().getAlto();
-        g.drawImage(imagenRaqueta, x,y,180, 43, null);
+        g.drawImage(imagenRaqueta, x,y,120, 28, null);
     }
    @Override
    public void paintComponent(Graphics g){
