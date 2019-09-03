@@ -5,8 +5,7 @@
  */
 package DogeBall.objects;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
+
 import java.awt.Rectangle;
 
 /**
@@ -15,173 +14,114 @@ import java.awt.Rectangle;
  */
 public class Bola {
 
-    private int x;
-    private int y;
-    private int maxX;
-    private int maxY;
-    private int minX;
-    private int minY;
-
-    private int diametro;
+    private double x;
+    private double lastX;
+    private double y;
+    private double lastY;
+    private double dx;
+    private double dy;
     private int radio;
-    private float direccion;
-    private float velocidad;
+    private int diametro;
+    private float normX = 0;
+    private float normY = 0;
+    private double velocida;
 
-    /**
-     * @return the diametro
-     */
-    public int getDiametro() {
-        return diametro;
+    public Bola(double x, double y, double dx, double dy, int radio) {
+        this.x = x;
+        this.y = y;
+        this.dx = dx;
+        this.dy = dy;
+        this.radio = radio;
+        diametro = radio * 2;
+        velocida = dy;
     }
 
-    /**
-     * @param diametro the diametro to set
-     */
-    public void setDiametro(int diametro) {
-        this.diametro = diametro;
+    public double getX() {
+        return x;
     }
 
-    /**
-     * @return the radio
-     */
+    public double getY() {
+        return y;
+    }
+
     public int getRadio() {
         return radio;
     }
 
-    /**
-     * @param radio the radio to set
-     */
+    public int getDiametro() {
+        return diametro;
+    }
+
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public void setY(double y) {
+        this.y = y;
+    }
+
+    public void setDx(double dx) {
+        this.dx = dx;
+    }
+
+    public void setDy(double dy) {
+        this.dy = dy;
+    }
+
     public void setRadio(int radio) {
         this.radio = radio;
     }
 
-    /**
-     * @return the direcion
-     */
-    public float getDirecion() {
-        return direccion;
-    }
-
-    /**
-     * @param direcion the direcion to set
-     */
-    public void setDirecion(float direcion) {
-        this.direccion = direcion;
-    }
-
-    /**
-     * @return the velocidad
-     */
-    public float getVelocidad() {
-        return velocidad;
-    }
-
-    /**
-     * @param velocidad the velocidad to set
-     */
-    public void setVelocidad(float velocidad) {
-        this.velocidad = velocidad;
-    }
-
-    /**
-     * @return the x
-     */
-    public int getX() {
-        return x;
-    }
-
-    /**
-     * @param x the x to set
-     */
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    /**
-     * @return the y
-     */
-    public int getY() {
-        return y;
-    }
-
-    /**
-     * @param y the y to set
-     */
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    public Bola(int x, int y, int maxX, int maxY, int minX, int minY, int diametro, int radio, float direcion, float velocidad, Color mColor) {
-        this.x = x;
-        this.y = y;
-        this.maxX = maxX;
-        this.maxY = maxY;
-        this.minX = minX;
-        this.minY = minY;
+    public void setDiametro(int diametro) {
         this.diametro = diametro;
-        this.radio = radio;
-        this.direccion = direcion;
-        this.velocidad = velocidad;
     }
 
-    public Bola() {
-        x = 360;
-        y = 300;
-        maxX = 0;
-        maxY = 0;
-        minX = 0;
-        minX = 0;
-        diametro = 80;
-        radio = 0;
-        direccion = 0.0f;
-        velocidad = 14.0f;
+    public void setNormX(float normX) {
+        this.normX = normX;
     }
 
-    public void cambiarRegion(int maxX, int maxY, int minX, int minY) {
-        this.maxX = maxX;
-        this.maxY = maxY;
-        this.minX = minX;
-        this.minY = minY;
-    }
-
-    public void rotar(int grados) {
-        direccion += (double) (grados * Math.PI / 360);
+    public void setNormY(float normY) {
+        this.normY = normY;
     }
 
     public Rectangle getBounds() {
-        return new Rectangle(x, y, diametro, diametro);
+        return new Rectangle((int) x, (int) y, diametro, diametro);
     }
-
-//    public boolean colicion(Raqueta raqueta) {
-//        float deltaX = x - Math.max(raqueta.getX(), Math.min(x, raqueta.getX() + raqueta.getAncho()));
-//        float deltaY = y - Math.max(raqueta.getY(), Math.min(y, raqueta.getY() - raqueta.getAlto()));
-//        return (deltaX * deltaX + deltaY * deltaY) < (80 * 80);
-//        
-//    }
 
     public void mover(Raqueta raqueta) {
-        int auxDeX = x;
-        int auxDeY = y;
-        x += (int) (Math.cos(direccion) * velocidad);
-        y += (int) (Math.sin(direccion) * velocidad);
-        if (x >= (maxX - radio) || x <= (minX + radio)) {
-            direccion = (float) (Math.PI - direccion);
-            x = auxDeX + (int) (Math.cos(direccion) * velocidad);
-            y = auxDeY + (int) (Math.sin(direccion) * velocidad);
+        lastX = x;
+        lastY = y;
+        x += dx;
+        y += dy;
+        double dX = x - 350;
+        double dY = y - 350;
+        if (Math.sqrt(dX * dX + dY * dY) >= 350 - radio) {
+            double v = Math.sqrt(dx * dx + dy * dy);
+            double agleToCollisionPoint = Math.atan2(-dY, dX);
+            double oldAngle = Math.atan2(-dy, dx);
+            double newAngle = 2 * agleToCollisionPoint - oldAngle;
+            dx = -v * Math.cos(newAngle);
+            dy = v * Math.sin(newAngle);
         }
-        if (y >= (maxY - radio) || y <= (minY + radio)) {
-            direccion = (float) (2 * Math.PI - direccion);
-            x = auxDeX + (int) (Math.cos(direccion) * velocidad);
-            y = auxDeY + (int) (Math.sin(direccion) * velocidad);
-        }
+        
+        
         if (raqueta.getBounds().intersects(getBounds()) || getBounds().intersects(raqueta.getBounds())) {
-            direccion = (float) (Math.random()*100 * Math.PI - direccion);
-            System.out.println(direccion);
-            x = auxDeX + (int) (Math.cos(direccion) * velocidad);
-            y = auxDeY + (int) (Math.sin(direccion) * velocidad);
-            System.out.println(x);
-            System.out.println(y);
-            System.out.println("Choco");
+            if (y < raqueta.getY() && x < raqueta.getX()) {              
+                  dx = -velocida;
+                  dy = -velocida;
+            }
+            if (y < raqueta.getY() && x > raqueta.getX()) {
+                  dy = -velocida;
+                  dx = velocida;
+            }
+            if (y > raqueta.getY() && x < raqueta.getX()) {
+                  dx = -velocida;
+            }
+            if(y > raqueta.getY() && x > raqueta.getX()){
+                dy = velocida;
+                dx = -velocida;
         }
+
     }
+   }
 }

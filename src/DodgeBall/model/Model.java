@@ -8,6 +8,7 @@ package DodgeBall.model;
 
 import DogeBall.objects.Bola;
 import DogeBall.objects.Raqueta;
+import java.util.ArrayList;
 
 /**
  *
@@ -16,18 +17,32 @@ import DogeBall.objects.Raqueta;
 public class Model {
     private Bola bola;
     private Raqueta raqueta;
+    private int cantidadBolas = 3;
+    private int diametroGlobal = 80;
+    ArrayList<Bola> bolas = new ArrayList();
     public Model() {
-        bola = new Bola();
+        for(int i=0; i<cantidadBolas; i++)
+            bolas.add(new Bola(Math.random()*300+200,Math.random()*300+200,-3.5,7,diametroGlobal/2));
          raqueta = new Raqueta();
-        bola.setDirecion((float)1.2);
-        bola.setVelocidad((float)9.0);
     }
-    public Bola getBola() {
-        return bola;
+    public Bola getBola(int i) {
+        return bolas.get(i);
     }
 
     public Raqueta getRaqueta() {
         return raqueta;
+    }
+
+    public void setCantidadBolas(int cantidadBolas) {
+        this.cantidadBolas = cantidadBolas;
+    }
+
+    public int getDiametroGlobal() {
+        return diametroGlobal;
+    }
+
+    public int getCantidadBolas() {
+        return cantidadBolas;
     }
     
 }

@@ -7,6 +7,7 @@ package DodgeBall.view;
 
 import DodgeBall.model.Model;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -26,9 +27,9 @@ public class PanelDeJuego extends JPanel {
 
     public PanelDeJuego(Model model) {
         this.model = model;
-        this.setSize(800, 700);
-        imagenBola = new BufferedImage(model.getBola().getDiametro(), model.getBola().getDiametro(), BufferedImage.TYPE_INT_RGB);
-        fondo = new BufferedImage(800, 700, BufferedImage.TYPE_INT_RGB);
+        this.setSize(800, 800);
+        imagenBola = new BufferedImage(model.getDiametroGlobal(), model.getDiametroGlobal(), BufferedImage.TYPE_INT_RGB);
+        fondo = new BufferedImage(800, 800, BufferedImage.TYPE_INT_RGB);
         imagenRaqueta = new BufferedImage(model.getRaqueta().getAncho(), model.getRaqueta().getAlto(), BufferedImage.TYPE_INT_RGB);
         try {
             imagenBola = ImageIO.read(this.getClass().getResourceAsStream("planeta.png"));
@@ -41,13 +42,23 @@ public class PanelDeJuego extends JPanel {
 
     private void pintarFondo(Graphics g) {
         g.drawImage(fondo, 0, 0, this.getWidth(), this.getHeight(), null);
+        g.drawOval(70, 48, 650, 650);
+        Font font = new Font("Space",1,40);
+        g.setFont(font);
+        g.setColor(Color.white);
+        g.drawString("0",600 , 40);
+        
+        
+        
     }
 
     public void pintarBola(Graphics g) {
-        int x = model.getBola().getX();
-        int y = model.getBola().getY();
-        int diametro = model.getBola().getDiametro();
-        g.drawImage(imagenBola, x, y, diametro, diametro, null);
+        for(int i = 0; i<model.getCantidadBolas();i++){
+            int x = (int)model.getBola(i).getX();
+            int y = (int)model.getBola(i).getY();
+            int diametro = model.getDiametroGlobal();
+            g.drawImage(imagenBola, x, y, diametro, diametro, null);
+        }
     }
 
     public void pintarRaqueta(Graphics g) {
