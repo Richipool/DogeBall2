@@ -15,16 +15,13 @@ import java.awt.Rectangle;
 public class Bola {
 
     private double x;
-    private double lastX;
     private double y;
-    private double lastY;
     private double dx;
     private double dy;
     private int radio;
     private int diametro;
-    private float normX = 0;
-    private float normY = 0;
     private double velocida;
+    private boolean choco = false;
 
     public Bola(double x, double y, double dx, double dy, int radio) {
         this.x = x;
@@ -75,27 +72,24 @@ public class Bola {
     public void setDiametro(int diametro) {
         this.diametro = diametro;
     }
-
-    public void setNormX(float normX) {
-        this.normX = normX;
-    }
-
-    public void setNormY(float normY) {
-        this.normY = normY;
-    }
-
+    
     public Rectangle getBounds() {
         return new Rectangle((int) x, (int) y, diametro, diametro);
     }
 
+    public boolean isChoco() {
+        return choco;
+    }
+    
+    
+
     public void mover(Raqueta raqueta) {
-        lastX = x;
-        lastY = y;
         x += dx;
         y += dy;
         double dX = x - 350;
         double dY = y - 350;
         if (Math.sqrt(dX * dX + dY * dY) >= 350 - radio) {
+            choco = true;
             double v = Math.sqrt(dx * dx + dy * dy);
             double agleToCollisionPoint = Math.atan2(-dY, dX);
             double oldAngle = Math.atan2(-dy, dx);
@@ -123,5 +117,7 @@ public class Bola {
         }
 
     }
+        
    }
+    
 }

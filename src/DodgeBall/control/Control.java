@@ -29,7 +29,8 @@ public class Control extends JFrame implements KeyListener, Runnable {
 
     public void jugar() throws InterruptedException {
         while (true) {
-            moverPelota();
+            modelo.mover();
+            modelo.cambiarMarcador();
             FrameJuego.getPanelJuego().repaint();
             Thread.sleep(10);
 
@@ -39,11 +40,11 @@ public class Control extends JFrame implements KeyListener, Runnable {
     public Model getModelo() {
         return modelo;
     }
-
-    public void moverPelota() {
-        for(int i = 0; i<modelo.getCantidadBolas();i++)
-            modelo.getBola(i).mover(modelo.getRaqueta());
-    }
+//
+//    public void moverPelota() {
+//        for(int i = 0; i<modelo.getCantidadBolas();i++)
+//            modelo.getBola(i).mover(modelo.getRaqueta());
+//    }
 
     @Override
     public void keyTyped(KeyEvent e) {

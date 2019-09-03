@@ -43,13 +43,10 @@ public class PanelDeJuego extends JPanel {
     private void pintarFondo(Graphics g) {
         g.drawImage(fondo, 0, 0, this.getWidth(), this.getHeight(), null);
         g.drawOval(70, 48, 650, 650);
-        Font font = new Font("Space",1,40);
+        Font font = new Font("Space",1,80);
         g.setFont(font);
         g.setColor(Color.white);
-        g.drawString("0",600 , 40);
-        
-        
-        
+        g.drawString(String.valueOf(model.getScore()),600 , 40); 
     }
 
     public void pintarBola(Graphics g) {
