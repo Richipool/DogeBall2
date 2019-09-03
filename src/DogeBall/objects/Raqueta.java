@@ -27,7 +27,7 @@ public class Raqueta {
         x = 200;
         y = 260;
         maxX = 800;
-        maxY = 700;
+        maxY = 800;
         minX = 0;
         minY = 0;
     }
@@ -108,7 +108,7 @@ public class Raqueta {
                 }
                 break;
             case 40://flecha abajo
-                if (y+velocidad <= maxY-alto*2) {
+                if (y+velocidad <= maxY-alto*1/2) {
                     y += velocidad;
                 }
                 break;
