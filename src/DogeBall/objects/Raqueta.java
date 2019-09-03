@@ -100,7 +100,7 @@ public class Raqueta {
         return new Rectangle(x, y, 120, 28);
     }
 
-    public void Mover(int flecha) {//recibe un entero que es el entero 
+    public void Mover(int flecha) {//recibe un int que es el que indica la direccion de la flecha
         switch (flecha) {
             case 38://flecha arriba
                 if (y-velocidad >= minY ) {
