@@ -15,10 +15,10 @@ public class Raqueta {
 
     private int x;
     private int y;
-    private int maxX;
-    private int maxY;
-    private int minX;
-    private int minY;
+    private int maxX=610;
+    private int maxY=655;
+    private int minX=50;
+    private int minY=50;
     int alto = 28;
     int ancho = 120;
     int velocidad = 40;
@@ -26,10 +26,6 @@ public class Raqueta {
     public Raqueta() {
         x = 290;
         y = 50;
-        maxX = 800;
-        maxY = 800;
-        minX = 0;
-        minY = 0;
     }
 
     public int getX() {
@@ -108,7 +104,7 @@ public class Raqueta {
                 }
                 break;
             case 40://flecha abajo
-                if (y + velocidad <= maxY - alto * 1 / 2) {
+                if (y + velocidad <= maxY) {
                     y += velocidad;
                 }
                 break;
@@ -118,7 +114,7 @@ public class Raqueta {
                 }
                 break;
             case 39://flecha derecha
-                if (x + velocidad <= maxX - ancho) {
+                if (x + velocidad <= maxX) {
                     x += velocidad;
                 }
                 break;
