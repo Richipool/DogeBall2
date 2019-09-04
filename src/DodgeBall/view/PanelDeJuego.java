@@ -6,9 +6,12 @@
 package DodgeBall.view;
 
 import DodgeBall.model.Model;
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.geom.Arc2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -43,16 +46,39 @@ public class PanelDeJuego extends JPanel {
     private void pintarFondo(Graphics g) {
         g.drawImage(fondo, 0, 0, this.getWidth(), this.getHeight(), null);
         g.drawOval(70, 48, 650, 650);
-        Font font = new Font("Space",1,80);
+
+        Font font = new Font("Space", 1, 45);
         g.setFont(font);
         g.setColor(Color.white);
-        g.drawString(String.valueOf(model.getScore()),600 , 40); 
+        g.drawString(String.valueOf(model.getScore()), 600, 40);
+    }
+
+    private void pintarArcos(Graphics g) {
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setStroke(new BasicStroke(6.0f));
+        g.setColor(Color.red);
+        g2d.draw(new Arc2D.Float(70, 48, 650, 650, 30, 20, Arc2D.OPEN));
+        g.setColor(Color.GREEN);
+        g2d.draw(new Arc2D.Float(70, 48, 650, 650, 80, 20, Arc2D.OPEN));
+        g.setColor(Color.red);
+        g2d.draw(new Arc2D.Float(70, 48, 650, 650, 130, 20, Arc2D.OPEN));
+        g.setColor(Color.GREEN);
+        g2d.draw(new Arc2D.Float(70, 48, 650, 650, 170, 20, Arc2D.OPEN));
+        g.setColor(Color.red);
+        g2d.draw(new Arc2D.Float(70, 48, 650, 650, 215, 20, Arc2D.OPEN));
+        g.setColor(Color.GREEN);
+        g2d.draw(new Arc2D.Float(70, 48, 650, 650, 260, 20, Arc2D.OPEN));
+        g.setColor(Color.red);
+        g2d.draw(new Arc2D.Float(70, 48, 650, 650, 310, 20, Arc2D.OPEN));
+        g.setColor(Color.GREEN);
+        g2d.draw(new Arc2D.Float(70, 48, 650, 650, 350, 20, Arc2D.OPEN));
+
     }
 
     public void pintarBola(Graphics g) {
-        for(int i = 0; i<model.getCantidadBolas();i++){
-            int x = (int)model.getBola(i).getX();
-            int y = (int)model.getBola(i).getY();
+        for (int i = 0; i < model.getCantidadBolas(); i++) {
+            int x = (int) model.getBola(i).getX();
+            int y = (int) model.getBola(i).getY();
             int diametro = model.getDiametroGlobal();
             g.drawImage(imagenBola, x, y, diametro, diametro, null);
         }
@@ -73,6 +99,7 @@ public class PanelDeJuego extends JPanel {
         pintarFondo(g);
         pintarBola(g);
         pintarRaqueta(g);
+        pintarArcos(g);
     }
 
     public Model getModel() {

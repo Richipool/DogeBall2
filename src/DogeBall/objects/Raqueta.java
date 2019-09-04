@@ -21,11 +21,11 @@ public class Raqueta {
     private int minY;
     int alto = 28;
     int ancho = 120;
-    int velocidad = 50;
+    int velocidad = 40;
 
     public Raqueta() {
-        x = 200;
-        y = 260;
+        x = 290;
+        y = 50;
         maxX = 800;
         maxY = 800;
         minX = 0;
@@ -103,26 +103,28 @@ public class Raqueta {
     public void Mover(int flecha) {//recibe un int que es el que indica la direccion de la flecha
         switch (flecha) {
             case 38://flecha arriba
-                if (y-velocidad >= minY ) {
+                if (y - velocidad >= minY) {
                     y -= velocidad;
                 }
                 break;
             case 40://flecha abajo
-                if (y+velocidad <= maxY-alto*1/2) {
+                if (y + velocidad <= maxY - alto * 1 / 2) {
                     y += velocidad;
                 }
                 break;
             case 37://flecha izquierda
-                if (x-velocidad >= minX) {
+                if (x - velocidad >= minX) {
                     x -= velocidad;
                 }
                 break;
             case 39://flecha derecha
-                if (x+velocidad <= maxX-ancho ) {
+                if (x + velocidad <= maxX - ancho) {
                     x += velocidad;
                 }
                 break;
 
         }
+        System.out.println("X = " + x);
+        System.out.println("Y = " + y);
     }
 }

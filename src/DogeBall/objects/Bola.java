@@ -97,7 +97,8 @@ public class Bola {
             dx = -v * Math.cos(newAngle);
             dy = v * Math.sin(newAngle);
         }
-        
+        else
+            choco = false;
         
         if (raqueta.getBounds().intersects(getBounds()) || getBounds().intersects(raqueta.getBounds())) {
             if (y < raqueta.getY() && x < raqueta.getX()) {              
@@ -115,9 +116,9 @@ public class Bola {
                 dy = velocida;
                 dx = -velocida;
         }
-
+            
     }
-        
+       
    }
     
 }

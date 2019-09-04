@@ -17,14 +17,14 @@ public class Model {
 
     private Bola bola;
     private Raqueta raqueta;
-    private int cantidadBolas = 3;
+    private int cantidadBolas = 1;
     private int diametroGlobal = 80;
     private int score = 0;
     ArrayList<Bola> bolas = new ArrayList();
 
     public Model() {
         for (int i = 0; i < cantidadBolas; i++) {
-            bolas.add(new Bola(Math.random() * 300 + 200, Math.random() * 300 + 200, -3.5, 7, diametroGlobal / 2));
+            bolas.add(new Bola(Math.random() * 300 + 200, Math.random() * 300 + 200, -1.5, 3, diametroGlobal / 2));
         }
         raqueta = new Raqueta();
     }
@@ -61,13 +61,13 @@ public class Model {
 
     public void cambiarMarcador() {
         for (int i = 0; i < cantidadBolas; i++) {
-            if (bolas.get(i).isChoco() && (bolas.get(i).getX() > 362 && bolas.get(i).getX() < 445 || bolas.get(i).getY() > 244 && bolas.get(i).getY() < 320)) {
-                score = score +1;
+            if (bolas.get(i).isChoco() && (bolas.get(i).getX() > 270 && bolas.get(i).getX() < 390 || bolas.get(i).getY() > 290 && bolas.get(i).getY() < 430)) {
+                score = score + 1;
             }
-            if(bolas.get(i).isChoco()&&(bolas.get(i).getX()>547&&bolas.get(i).getX()<600||bolas.get(i).getX()>186&&bolas.get(i).getX()<249)){
-                score = score -1;
+            if (bolas.get(i).isChoco() && (bolas.get(i).getX() > 530 && bolas.get(i).getX() < 615 || bolas.get(i).getX() > 50 && bolas.get(i).getX() < 130)) {
+                score = score - 1;
+            }
         }
-    }
     }
     /*
     public void setMarcador() {
