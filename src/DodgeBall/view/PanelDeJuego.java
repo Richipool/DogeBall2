@@ -72,7 +72,6 @@ public class PanelDeJuego extends JPanel {
         g2d.draw(new Arc2D.Float(70, 48, 650, 650, 310, 20, Arc2D.OPEN));
         g.setColor(Color.GREEN);
         g2d.draw(new Arc2D.Float(70, 48, 650, 650, 350, 20, Arc2D.OPEN));
-
     }
 
     public void pintarBola(Graphics g) {
@@ -90,7 +89,6 @@ public class PanelDeJuego extends JPanel {
         int ancho = model.getRaqueta().getAncho();
         int alto = model.getRaqueta().getAlto();
         g.drawImage(imagenRaqueta, x, y, 120, 28, null);
-
     }
 
     @Override
