@@ -15,10 +15,13 @@ public class Raqueta {
 
     private int x;
     private int y;
+    /*valores por defecto de los limites del ciruculo de juego 
+    para que la raqueta no sobrepase del limite*/
     private int maxX=610;
     private int maxY=655;
     private int minX=50;
     private int minY=50;
+    /*tamanio de la raqueta*/
     int alto = 28;
     int ancho = 120;
     int velocidad = 40;

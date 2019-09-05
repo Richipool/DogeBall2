@@ -80,6 +80,10 @@ public class Bola {
     public boolean isChoco() {
         return choco;
     }
+
+    public void setVelocida(double velocida) {
+        this.velocida = velocida;
+    }
     
     
 

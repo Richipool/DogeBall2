@@ -8,7 +8,13 @@ package DodgeBall.view;
 import DodgeBall.control.Control;
 import DodgeBall.model.Model;
 import java.awt.Dimension;
+import java.awt.GridLayout;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerModel;
+import javax.swing.SpinnerNumberModel;
 
 /**
  *
@@ -19,6 +25,8 @@ public class GameJFrame extends javax.swing.JFrame{
     private PanelDeJuego panelJuego;
     private Model modelo;
     private Control control;
+    private int cantidad;
+    private int velocidad;
 
     /**
      * Creates new form GameJFrame
@@ -63,6 +71,40 @@ public class GameJFrame extends javax.swing.JFrame{
         this.control = control;
     }
     
+    private void Settings(){
+        JPanel pane = new JPanel();//es solo un cuadrito donde se pueden meter cosas
+        pane.setLayout(new GridLayout(1,1,1,1));//parte el pane en cuadritos, en un grid, interesante (0 rows, 1 column, y el espacio entre cada objeto agregado
+        //1 fila, mete todo seguido
+        //JTextField field1 = new JTextField(5);//es un espacio para escribir, cantidad de columnas es el largo
+        //JTextField field2 = new JTextField(5);
+        SpinnerModel sm = new SpinnerNumberModel(1, 1, 5, 1);//muestra el 0, inicia en 0 y termina en 5,  y muetra 1 numero
+        SpinnerModel sn = new SpinnerNumberModel(5, 5, 12, 1);//muestra el 0, inicia en 0 y termina en 5,  y muetra 1 numero
+        JSpinner spin1 = new JSpinner(sm);
+        JSpinner spin2 = new JSpinner(sn);
+
+        JLabel label1 = new JLabel("Esferas");
+        JLabel label2 = new JLabel("Velocidad");
+        pane.add(label1);//como el grid solo tiene 1 columna, agrega este primero y todo 
+        pane.add(spin1);//lo pone seguido del label
+        pane.add(label2);//lo pone seguido del primer spin
+        pane.add(spin2);//lo pone seguido del label 2
+        int option = JOptionPane.showConfirmDialog(null, pane, "Settings", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
+        if(option==0){//dio click en aceptar
+            cantidad = (int)spin1.getValue();//obtengo el valor de la cantidad de bolas
+            velocidad = (int) spin2.getValue();//obtengo el valor de la velocidad
+            modelo.agregarBolas(cantidad);
+            modelo.cambiarVelocidad(velocidad);
+        }
+        else{
+            cantidad = 0;
+            velocidad = 0;
+        }
+        System.out.println(option);
+        System.out.println(cantidad);
+        System.out.println(velocidad);
+        //option =0 si da aceptar
+        //option =2 si da cancelar
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -107,7 +149,7 @@ public class GameJFrame extends javax.swing.JFrame{
         jMenu2.setText("Edit");
 
         ItemConfiguracion.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
-        ItemConfiguracion.setText("jMenuItem1");
+        ItemConfiguracion.setText("Settings");
         ItemConfiguracion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ItemConfiguracionActionPerformed(evt);
@@ -151,8 +193,10 @@ public class GameJFrame extends javax.swing.JFrame{
     }//GEN-LAST:event_ItemExitActionPerformed
 
     private void ItemConfiguracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemConfiguracionActionPerformed
-        // TODO add your handling code here:
-        /*configuracion para el cambio de velocidad*/
+        modelo.pausa();
+        this.Settings();
+        //modelo.Pausa() dx y dy 0 
+        
     }//GEN-LAST:event_ItemConfiguracionActionPerformed
 
     private void informacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_informacionActionPerformed

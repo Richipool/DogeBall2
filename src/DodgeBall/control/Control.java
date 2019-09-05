@@ -32,7 +32,6 @@ public class Control extends JFrame implements KeyListener, Runnable {
             modelo.mover();
             modelo.cambiarMarcador();
             FrameJuego.getPanelJuego().repaint();
-            FrameJuego.playMusic();
             Thread.sleep(10);
 
         }
