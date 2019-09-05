@@ -8,6 +8,13 @@ package DodgeBall.view;
 import DodgeBall.control.Control;
 import DodgeBall.model.Model;
 import java.awt.Dimension;
+import java.io.File;
+import java.io.IOException;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
  *
@@ -60,6 +67,21 @@ public class GameJFrame extends javax.swing.JFrame{
 
     public void setControl(Control control) {
         this.control = control;
+    }
+    
+    public void playMusic() {
+        File musicPath = new File("y2mate.com - nyan_cat_original_QH2-TGUlwu4.wav");
+        try {
+            if (musicPath.exists()) {
+                AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInput);
+                clip.loop(Clip.LOOP_CONTINUOUSLY);
+            }
+        } catch (IOException | LineUnavailableException | UnsupportedAudioFileException ex) {
+
+        }
+
     }
 
     /**
