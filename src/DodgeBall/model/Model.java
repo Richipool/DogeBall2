@@ -17,7 +17,7 @@ public class Model {
 
     private Bola bola;
     private Raqueta raqueta;
-    private int cantidadBolas = 5;
+    private int cantidadBolas = 3;
     private int diametroGlobal = 80;
     private int score = 0;
     ArrayList<Bola> bolas = new ArrayList();
