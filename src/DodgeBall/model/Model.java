@@ -5,26 +5,30 @@
  */
 package DodgeBall.model;
 
-import DogeBall.objects.Bola;
-import DogeBall.objects.Raqueta;
+
 import java.util.ArrayList;
+import java.util.Observable;
 
 /**
  *
  * @author GL552
  */
-public class Model {
+public class Model extends Observable{
 
-    private Bola bola;
+    //private Bola bola;
     private Raqueta raqueta;
-    private int cantidadBolas = 1;
-    private int diametroGlobal = 60;
-    private int score = 0;
+    private int cantidadBolas ;
+    private int diametroGlobal ;
+    private int score;
     ArrayList<Bola> bolas = new ArrayList();
 
     public Model() {
-        this.agregarBolas(cantidadBolas);
+        cantidadBolas = 1;
+        score = 0;
+        diametroGlobal = 60;
         raqueta = new Raqueta();
+        bolas = new ArrayList();
+        this.agregarBolas(cantidadBolas);
     }
 
     public Bola getBola(int i) {
@@ -51,6 +55,8 @@ public class Model {
         for (int i = 0; i < cantidadBolas; i++) {
             bolas.get(i).mover(raqueta);
         }
+        setChanged();
+        notifyObservers();
     }
 
     public int getScore() {
@@ -68,6 +74,8 @@ public class Model {
                 return false;
             }
         }
+        setChanged();
+        notifyObservers();
         return true;
     }
 
