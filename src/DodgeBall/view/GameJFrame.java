@@ -46,6 +46,7 @@ public class GameJFrame extends javax.swing.JFrame{
         this.add(panelJuego);
         this.addKeyListener(control);
     }
+    /**/
     
     public PanelDeJuego getPanelJuego() {
         return panelJuego;
