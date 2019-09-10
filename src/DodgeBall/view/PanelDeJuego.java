@@ -11,6 +11,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.geom.Arc2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -27,10 +29,14 @@ public class PanelDeJuego extends JPanel {
 
     private Model model;
     BufferedImage imagenBola, fondo, imagenRaqueta;
+    Toolkit toolkit;
+    Image backgroud;
 
     public PanelDeJuego(Model model) {
         this.model = model;
         this.setSize(800, 800);
+        toolkit=Toolkit.getDefaultToolkit();
+        backgroud=toolkit.getImage(this.getClass().getResource("MDbwLa3.gif"));
         imagenBola = new BufferedImage(model.getDiametroGlobal(), model.getDiametroGlobal(), BufferedImage.TYPE_INT_RGB);
         fondo = new BufferedImage(800, 800, BufferedImage.TYPE_INT_RGB);
         imagenRaqueta = new BufferedImage(model.getRaqueta().getAncho(), model.getRaqueta().getAlto(), BufferedImage.TYPE_INT_RGB);
@@ -41,14 +47,13 @@ public class PanelDeJuego extends JPanel {
         } catch (IOException ex) {
             Logger.getLogger(PanelDeJuego.class.getName()).log(Level.SEVERE, null, ex);
         }
+       
     }
 
     private void pintarFondo(Graphics g) {
-        g.drawImage(fondo, 0, 0, this.getWidth(), this.getHeight(), null);
+        g.drawImage(backgroud, 0, 0, this.getWidth(), this.getHeight(), null);
         g.drawOval(70, 48, 650, 650);
-
-        Font font = new Font("Space", 1, 45);
-        g.setFont(font);
+        g.setFont(new Font("Space", 1, 45));
         g.setColor(Color.white);
         g.drawString(String.valueOf(model.getScore()), 600, 40);
     }
@@ -103,5 +108,6 @@ public class PanelDeJuego extends JPanel {
     public Model getModel() {
         return model;
     }
+
 
 }
