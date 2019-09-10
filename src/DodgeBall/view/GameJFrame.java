@@ -48,8 +48,9 @@ public class GameJFrame extends javax.swing.JFrame implements Observer {
         modelo = model;
 //        AudioClip sonido;
         sonido2 = java.applet.Applet.newAudioClip(getClass().getResource("tu_tu_ru.wav"));
-        sonido = java.applet.Applet.newAudioClip(getClass().getResource("Nyan_cat.wav"));
-        //sonido.play();
+        sonido = java.applet.Applet.newAudioClip(getClass().getResource("Nyan_cat2.wav"));
+        sonido.play();
+        sonido.loop();
         modelo.addObserver(this);
         Dimension dimencion = new Dimension(800, 800);
         this.setSize(dimencion);

@@ -80,9 +80,9 @@ public class Model extends Observable {
                 notifyObservers();
                 return false;
             }
-            chocoSonido = false;
+            
         }
-
+        chocoSonido = false;
         return true;
     }
 
