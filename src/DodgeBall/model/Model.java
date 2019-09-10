@@ -5,7 +5,6 @@
  */
 package DodgeBall.model;
 
-
 import java.util.ArrayList;
 import java.util.Observable;
 
@@ -13,12 +12,12 @@ import java.util.Observable;
  *
  * @author GL552
  */
-public class Model extends Observable{
+public class Model extends Observable {
 
     //private Bola bola;
     private Raqueta raqueta;
-    private int cantidadBolas ;
-    private int diametroGlobal ;
+    private int cantidadBolas;
+    private int diametroGlobal;
     private int score;
     ArrayList<Bola> bolas = new ArrayList();
 
@@ -85,20 +84,28 @@ public class Model extends Observable{
         for (int i = cantAux; i <= cantidadBolas; i++) {
             bolas.add(new Bola(Math.random() * 300 + 200, Math.random() * 300 + 200, -1.5, 4, diametroGlobal / 2));
         }
+        setChanged();
+        notifyObservers();
     }
-    public void cambiarVelocidad(int velocidad){
-        for(int i = 0; i<cantidadBolas; i++){
+
+    public void cambiarVelocidad(int velocidad) {
+        for (int i = 0; i < cantidadBolas; i++) {
             bolas.get(i).setDy(velocidad);
             bolas.get(i).setDx(velocidad);
             bolas.get(i).setVelocida(velocidad);
         }
+        setChanged();
+        notifyObservers();
     }
-    public void pausa(){
-         for(int i = 0; i<cantidadBolas; i++){
+
+    public void pausa() {
+        for (int i = 0; i < cantidadBolas; i++) {
             bolas.get(i).setDx(0);
             bolas.get(i).setDy(0);
             score = 0;
         }
+        setChanged();
+        notifyObservers();
     }
 
     /*
