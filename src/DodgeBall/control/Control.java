@@ -24,7 +24,7 @@ public class Control extends JFrame implements KeyListener, Runnable {
         modelo = new Model();
         FrameJuego = new GameJFrame(modelo, this);
         FrameJuego.setVisible(true);
-        //vista.setControl(this);
+        FrameJuego.setControl(this);
     }
 
     public void jugar() throws InterruptedException {
