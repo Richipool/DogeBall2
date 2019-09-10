@@ -20,8 +20,6 @@ public class DodgeBall2 {
         // TODO code application logic here
         
         control = new Control();
-   
-        control.jugar();
         // TODO code application logic here
         /*Cambiar la clase bola porque hay cosas que tienen que estar definidas ya estaticas y tambien probar lo del frame XD
         */
