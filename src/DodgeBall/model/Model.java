@@ -19,6 +19,7 @@ public class Model extends Observable {
     private int cantidadBolas;
     private int diametroGlobal;
     private int score;
+    private boolean chocoSonido;
     ArrayList<Bola> bolas = new ArrayList();
 
     public Model() {
@@ -28,6 +29,7 @@ public class Model extends Observable {
         raqueta = new Raqueta();
         bolas = new ArrayList();
         this.agregarBolas(cantidadBolas);
+        chocoSonido = false;
     }
 
     public Bola getBola(int i) {
@@ -66,16 +68,19 @@ public class Model extends Observable {
         for (int i = 0; i < cantidadBolas; i++) {
             if (bolas.get(i).isChoco() && (bolas.get(i).getX() > 270 && bolas.get(i).getX() < 390 || bolas.get(i).getY() > 290 && bolas.get(i).getY() < 430)) {
                 score = score + 1;
+                chocoSonido = true;
                 setChanged();
                 notifyObservers();
                 return true;
             }
             if (bolas.get(i).isChoco() && (bolas.get(i).getX() > 530 && bolas.get(i).getX() < 615 || bolas.get(i).getX() > 50 && bolas.get(i).getX() < 130)) {
                 score = score - 1;
+                chocoSonido = true;
                 setChanged();
                 notifyObservers();
                 return false;
             }
+            chocoSonido = false;
         }
 
         return true;
@@ -111,24 +116,8 @@ public class Model extends Observable {
         notifyObservers();
     }
 
-    /*
-    public void setMarcador() {
-
-        bolas.stream().forEach((i) -> {
-            if (i.getChoco() && (i.x > 362 && i.x < 445  i.y > 244 && i.y < 320)) {
-                sonido.play();
-                System.out.println("Choco---> " + i.getChoco());
-                setMarcador(1);
-            }
-            if (i.getChoco() && (i.x > 547 && i.x < 600  i.x > 186 && i.x < 249)) {
-                sonido.play();
-                System.out.println("Choco---> " + i.getChoco());
-                setMarcador(-1);
-            }
-
-        });
-
+    public boolean isChocoSonido() {
+        return chocoSonido;
     }
-
-     */
+    
 }

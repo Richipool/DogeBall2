@@ -7,10 +7,18 @@ package DodgeBall.view;
 
 import DodgeBall.control.Control;
 import DodgeBall.model.Model;
+import java.applet.AudioClip;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.io.File;
+import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -22,14 +30,15 @@ import javax.swing.SpinnerNumberModel;
  *
  * @author GL552
  */
-public class GameJFrame extends javax.swing.JFrame implements Observer{
+public class GameJFrame extends javax.swing.JFrame implements Observer {
 
     private PanelDeJuego panelJuego;
     private Model modelo;
     private Control control;
     private int cantidad;
     private int velocidad;
-
+    private AudioClip sonido;
+    private AudioClip sonido2;
     /**
      * Creates new form GameJFrame
      */
@@ -37,6 +46,10 @@ public class GameJFrame extends javax.swing.JFrame implements Observer{
         initComponents();
         this.control = control;
         modelo = model;
+//        AudioClip sonido;
+        sonido2 = java.applet.Applet.newAudioClip(getClass().getResource("tu_tu_ru.wav"));
+        sonido = java.applet.Applet.newAudioClip(getClass().getResource("Nyan_cat.wav"));
+        //sonido.play();
         modelo.addObserver(this);
         Dimension dimencion = new Dimension(800, 800);
         this.setSize(dimencion);
@@ -48,9 +61,10 @@ public class GameJFrame extends javax.swing.JFrame implements Observer{
         panelJuego.setSize(dimencion);
         this.add(panelJuego);
         this.addKeyListener(control);
+        //this.playMusic();
     }
+
     /**/
-    
     public PanelDeJuego getPanelJuego() {
         return panelJuego;
     }
@@ -74,10 +88,10 @@ public class GameJFrame extends javax.swing.JFrame implements Observer{
     public void setControl(Control control) {
         this.control = control;
     }
-    
-    private void Settings(){
+
+    private void Settings() {
         JPanel pane = new JPanel();//es solo un cuadrito donde se pueden meter cosas
-        pane.setLayout(new GridLayout(1,1,1,1));//parte el pane en cuadritos, en un grid, interesante (0 rows, 1 column, y el espacio entre cada objeto agregado
+        pane.setLayout(new GridLayout(1, 1, 1, 1));//parte el pane en cuadritos, en un grid, interesante (0 rows, 1 column, y el espacio entre cada objeto agregado
         //1 fila, mete todo seguido
         //JTextField field1 = new JTextField(5);//es un espacio para escribir, cantidad de columnas es el largo
         //JTextField field2 = new JTextField(5);
@@ -93,33 +107,36 @@ public class GameJFrame extends javax.swing.JFrame implements Observer{
         pane.add(label2);//lo pone seguido del primer spin
         pane.add(spin2);//lo pone seguido del label 2
         int option = JOptionPane.showConfirmDialog(null, pane, "Settings", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
-        if(option==0){//dio click en aceptar
-            cantidad = (int)spin1.getValue();//obtengo el valor de la cantidad de bolas
+        if (option == 0) {//dio click en aceptar
+            cantidad = (int) spin1.getValue();//obtengo el valor de la cantidad de bolas
             velocidad = (int) spin2.getValue();//obtengo el valor de la velocidad
             modelo.agregarBolas(cantidad);
             modelo.cambiarVelocidad(velocidad);
-        }
-        else{
+        } else {
             cantidad = 0;
             velocidad = 0;
         }
         System.out.println(option);
         System.out.println(cantidad);
         System.out.println(velocidad);
-        //option =0 si da aceptar
-        //option =2 si da cancelar
     }
     
-    
+    public void sonarRebote(){
+        if(modelo.isChocoSonido()){
+            sonido2.play();
+        }
+    }
     public void jugar() throws InterruptedException {
         while (true) {
             modelo.mover();
             modelo.cambiarMarcador();
-            //FrameJuego.getPanelJuego().repaint();
+            this.sonarRebote();
             Thread.sleep(10);
 
         }
     }
+
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -210,49 +227,15 @@ public class GameJFrame extends javax.swing.JFrame implements Observer{
     private void ItemConfiguracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemConfiguracionActionPerformed
         modelo.pausa();
         this.Settings();
-        //modelo.Pausa() dx y dy 0 
-        
+
     }//GEN-LAST:event_ItemConfiguracionActionPerformed
 
     private void informacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_informacionActionPerformed
-        // TODO add your handling code here:
+
         JOptionPane.showMessageDialog(this, "Juego Dodge Ball\nUniversidad Nacional\nEscuela de Informática\n Etudiantes:\n Richard Vargas Vado 402380714\n"
-                + "Cristopher Arce Diaz 702680366"+"\n2019", "ABOUT", 1);
+                + "Cristopher Arce Diaz 702680366" + "\n2019", "ABOUT", 1);
     }//GEN-LAST:event_informacionActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GameJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GameJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GameJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GameJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu About;
