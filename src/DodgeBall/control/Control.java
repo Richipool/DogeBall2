@@ -20,22 +20,14 @@ public class Control extends JFrame implements KeyListener, Runnable {
     private Model modelo;
     private GameJFrame FrameJuego;
 
-    public Control() {
+    public Control() throws InterruptedException {
         modelo = new Model();
         FrameJuego = new GameJFrame(modelo, this);
         FrameJuego.setVisible(true);
         FrameJuego.setControl(this);
+        FrameJuego.jugar();
     }
 
-    public void jugar() throws InterruptedException {
-        while (true) {
-            modelo.mover();
-            modelo.cambiarMarcador();
-            FrameJuego.getPanelJuego().repaint();
-            Thread.sleep(10);
-
-        }
-    }
 
     public Model getModelo() {
         return modelo;

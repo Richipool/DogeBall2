@@ -9,6 +9,8 @@ import DodgeBall.control.Control;
 import DodgeBall.model.Model;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.util.Observable;
+import java.util.Observer;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -20,7 +22,7 @@ import javax.swing.SpinnerNumberModel;
  *
  * @author GL552
  */
-public class GameJFrame extends javax.swing.JFrame{
+public class GameJFrame extends javax.swing.JFrame implements Observer{
 
     private PanelDeJuego panelJuego;
     private Model modelo;
@@ -35,6 +37,7 @@ public class GameJFrame extends javax.swing.JFrame{
         initComponents();
         this.control = control;
         modelo = model;
+        modelo.addObserver(this);
         Dimension dimencion = new Dimension(800, 800);
         this.setSize(dimencion);
         //this.setPreferredSize(dimencion);
@@ -105,6 +108,17 @@ public class GameJFrame extends javax.swing.JFrame{
         System.out.println(velocidad);
         //option =0 si da aceptar
         //option =2 si da cancelar
+    }
+    
+    
+    public void jugar() throws InterruptedException {
+        while (true) {
+            modelo.mover();
+            modelo.cambiarMarcador();
+            //FrameJuego.getPanelJuego().repaint();
+            Thread.sleep(10);
+
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -252,4 +266,9 @@ public class GameJFrame extends javax.swing.JFrame{
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuBar jMenuJuego;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void update(Observable o, Object arg) {
+        panelJuego.repaint();
+    }
 }
