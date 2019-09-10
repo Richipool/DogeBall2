@@ -17,18 +17,26 @@ public class Raqueta {
     private int y;
     /*valores por defecto de los limites del ciruculo de juego 
     para que la raqueta no sobrepase del limite*/
-    private int maxX=610;
-    private int maxY=655;
-    private int minX=50;
-    private int minY=50;
+    private int maxX;
+    private int maxY;
+    private int minX;
+    private int minY;
     /*tamanio de la raqueta*/
-    int alto = 28;
-    int ancho = 120;
-    int velocidad = 40;
+    int alto;
+    int ancho;
+    int velocidad;
 
     public Raqueta() {
+        maxX = 610;
+        maxY = 655;
+        minX = 50;
+        minY = 50;
+        /*tamanio de la raqueta*/
+        alto = 28;
+        ancho = 120;
+        velocidad = 40;
         x = 290;
-        y = 50;
+        y = 500;
     }
 
     public int getX() {

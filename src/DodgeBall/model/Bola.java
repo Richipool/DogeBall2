@@ -21,9 +21,10 @@ public class Bola {
     private int radio;
     private int diametro;
     private double velocida;
-    private boolean choco = false;
+    private boolean choco;
 
     public Bola(double x, double y, double dx, double dy, int radio) {
+        choco = false;
         this.x = x;
         this.y = y;
         this.dx = dx;
