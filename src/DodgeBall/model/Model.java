@@ -20,6 +20,8 @@ public class Model extends Observable {
     private int diametroGlobal;
     private int score;
     private boolean chocoSonido;
+    private boolean chocoSonido2;
+    
     ArrayList<Bola> bolas = new ArrayList();
 
     public Model() {
@@ -30,6 +32,7 @@ public class Model extends Observable {
         bolas = new ArrayList();
         this.agregarBolas(cantidadBolas);
         chocoSonido = false;
+        chocoSonido2 = false;
     }
 
     public Bola getBola(int i) {
@@ -75,7 +78,7 @@ public class Model extends Observable {
             }
             if (bolas.get(i).isChoco() && (bolas.get(i).getX() > 530 && bolas.get(i).getX() < 615 || bolas.get(i).getX() > 50 && bolas.get(i).getX() < 130)) {
                 score = score - 1;
-                chocoSonido = true;
+                chocoSonido2 = true;
                 setChanged();
                 notifyObservers();
                 return false;
@@ -83,6 +86,7 @@ public class Model extends Observable {
             
         }
         chocoSonido = false;
+        chocoSonido2 = false;
         return true;
     }
 
@@ -119,5 +123,10 @@ public class Model extends Observable {
     public boolean isChocoSonido() {
         return chocoSonido;
     }
+
+    public boolean isChocoSonido2() {
+        return chocoSonido2;
+    }
+    
     
 }

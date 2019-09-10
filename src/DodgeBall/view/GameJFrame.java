@@ -39,6 +39,8 @@ public class GameJFrame extends javax.swing.JFrame implements Observer {
     private int velocidad;
     private AudioClip sonido;
     private AudioClip sonido2;
+    private AudioClip sonido3;
+
     /**
      * Creates new form GameJFrame
      */
@@ -47,6 +49,7 @@ public class GameJFrame extends javax.swing.JFrame implements Observer {
         this.control = control;
         modelo = model;
 //        AudioClip sonido;
+        sonido3 = java.applet.Applet.newAudioClip(getClass().getResource("deathSound.wav"));
         sonido2 = java.applet.Applet.newAudioClip(getClass().getResource("tu_tu_ru.wav"));
         sonido = java.applet.Applet.newAudioClip(getClass().getResource("Nyan_cat2.wav"));
         sonido.play();
@@ -121,12 +124,16 @@ public class GameJFrame extends javax.swing.JFrame implements Observer {
         System.out.println(cantidad);
         System.out.println(velocidad);
     }
-    
-    public void sonarRebote(){
-        if(modelo.isChocoSonido()){
+
+    public void sonarRebote() {
+        if (modelo.isChocoSonido()) {
             sonido2.play();
         }
+        if(modelo.isChocoSonido2()){
+            sonido3.play();
+        }
     }
+
     public void jugar() throws InterruptedException {
         while (true) {
             modelo.mover();
@@ -136,7 +143,6 @@ public class GameJFrame extends javax.swing.JFrame implements Observer {
 
         }
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
